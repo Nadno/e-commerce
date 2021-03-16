@@ -1,11 +1,11 @@
-# Aplicação
+# Imagens da aplicação
 
 [imagens]
 
 ## Instalação
 
 ### Clonando:
-O primeiro comando clona apenas o backend, o segundo apenas o front-end que está em um modulo diferente. E com o terceiro comando você pode clonar ambos repositórios.
+O primeiro comando clona apenas o backend, o segundo apenas o front-end que está em um modulo diferente. Com o terceiro comando, você pode clonar ambos repositórios.
 
 ```sh
     git clone https://github.com/Nadno/vaga-react.git
@@ -55,3 +55,16 @@ No front-end é preciso configurar a **baseURL** do *axios* no arquivo api dentr
 - *dev* para desenvolvimento.
 - *build* para gerar a versão de distribuição.
 - *type-check* para procurar por erros de tipagem.
+
+# Aplicação
+
+## Typescript
+Além de clarear muitos lugares no código, *typescript* é um grande facilitador quando se trabalha com diversos tipos de dados mais complexos.
+## Front-end
+O [front-end encontra-se em outro modulo](https://github.com/Nadno/vaga-react-frontend) para facilitar o deploy dessa parte na vercel com o uso de Next.
+### Next
+A escolha do *Next*, deu-se para criação de caminhos estáticos, e uso de *props* estáticas, para me permitir criar páginas estáticas, como a de categoria *mouses*, que transforma sua primeira página de produtos em uma página estática junto com o uso de **meta tags**, acrescentando ao **SEO** da página, claro, de maneira simples nesta ocasião.
+### Axios
+Optei pelo axios devido a familiaridade com a biblioteca para o estabelecimento de uma *baseURL*, métodos **HTTP**, e cancelamento de requisições para impedir `setStates` em componentes desmontados.
+### Styled Components
+Acredito que user styled components me permite, apesar de não conseguir aproveitar muito bem metodologias como **BEM**, a criação e reutilização de componentes/estilos repetitivos como é o caso do `Container`, `FlexContainer` e `GridContainer`, componentes que utilizei bastante nos layouts das páginas.
