@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { getTokenFromHeaders, verifyJwt } from '../utils/jwt';
+import Jwt from '../utils/jwt';
 
 const EXCLUDED_PATHS = [
   '/product',
@@ -15,11 +15,11 @@ const checkJwt = (req: Request, res: Response, next: NextFunction) => {
   const isExcluded = !!EXCLUDED_PATHS.find(p => path.includes(p));
   if (isExcluded) return next();
 
-  let token = getTokenFromHeaders(req.headers);
+  let token = Jwt.getTokenFromHeaders(req.headers);
   if (!token) return res.jsonUnauthorized();
 
   try {
-    const decoded = verifyJwt(token) as { id: string };
+    const decoded = Jwt.verifyJwt(token) as { id: string };
 
     res.locals = {
       ...res.locals,

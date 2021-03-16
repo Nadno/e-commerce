@@ -3,12 +3,7 @@ import db from '../database/connection';
 import { Request, Response } from 'express';
 
 import bcrypt from 'bcrypt';
-import {
-  generateJwt,
-  generateRefreshJwt,
-  getTokenFromHeaders,
-  verifyRefreshJwt,
-} from '../utils/jwt';
+import Jwt from '../utils/jwt';
 import checkLogin from '../utils/login';
 
 class User {
@@ -59,8 +54,8 @@ class User {
         .select('*')
         .where('id', '=', newAccountId);
 
-      const token = generateJwt({ id: account.id });
-      const refreshToken = generateRefreshJwt({
+      const token = Jwt.generateJwt({ id: account.id });
+      const refreshToken = Jwt.generateRefreshJwt({
         id: account.id,
         version: account.jwtVersion,
       });
@@ -83,8 +78,8 @@ class User {
     try {
       const account = await checkLogin(req.body);
 
-      const token = generateJwt({ id: account.id });
-      const refreshToken = generateRefreshJwt({
+      const token = Jwt.generateJwt({ id: account.id });
+      const refreshToken = Jwt.generateRefreshJwt({
         id: account.id,
         version: account.jwtVersion,
       });
@@ -96,25 +91,6 @@ class User {
       });
     } catch (err) {
       return res.jsonBadRequest({ message: err });
-    }
-  }
-
-  public async remove(req: Request, res: Response): Promise<Response> {
-    const { toDelete = [] } = req.body;
-    if (!toDelete.length) return res.jsonBadRequest();
-
-    try {
-      const account = await checkLogin(req.body);
-
-      await db('users').delete(toDelete).where({
-        id: account.id,
-      });
-
-      return res.jsonOk();
-    } catch {
-      return res.jsonServerError({
-        message: 'Não foi possível deletar sua conta',
-      });
     }
   }
 
@@ -140,11 +116,11 @@ class User {
   }
 
   public async refresh(req: Request, res: Response): Promise<Response> {
-    const token = getTokenFromHeaders(req.headers);
+    const token = Jwt.getTokenFromHeaders(req.headers);
     if (token == null) return res.jsonUnauthorized({ message: 'Token inválido' });
 	
     try {
-      const decoded = verifyRefreshJwt(token);
+      const decoded = Jwt.verifyRefreshJwt(token);
 	
       const [account] = await db('users')
         .select('users.id', 'users.name', 'users.avatar')
@@ -154,7 +130,7 @@ class User {
       if (decoded.version !== account.jwtVersion) return res.jsonUnauthorized();
 
       const meta = {
-        token: generateJwt({ id: account.id }),
+        token: Jwt.generateJwt({ id: account.id }),
       };
 
       return res.jsonOk(meta);
