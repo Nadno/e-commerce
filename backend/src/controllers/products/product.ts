@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
 
-import ProductFilter from './filter';
+import Select from './select';
 import JSONdb from '../../products.json';
-import getPage from '../../utils/getPage';
+import { getPage } from '../../utils/getPage';
 import db from '../../database/connection';
 
 const ITEMS_FOR_PAGE = 5;
 const COMMENTS_SELECT = [
-	'rating.comment',
-    'rating.rate',
-    'rating.id',
-    'users.name',
-    'users.avatar'
+  'rating.comment',
+  'rating.rate',
+  'rating.id',
+  'users.name',
+  'users.avatar',
 ];
 
 class Product {
@@ -22,13 +22,13 @@ class Product {
 
   public async item(req: Request, res: Response): Promise<Response> {
     const { query, params } = req;
-    const { filter } = params;
+    const { select } = params;
 
-    if (!(filter in ProductFilter))
+    if (!(select in Select))
       return res.jsonBadRequest({ message: 'Filtro inválido' });
 
     try {
-      return res.jsonOk(await ProductFilter[filter](query.value));
+      return res.jsonOk(await (Select as any)[select](query.value));
     } catch (err) {
       return res.jsonServerError();
     }

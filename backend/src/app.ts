@@ -31,7 +31,7 @@ class App {
     const { app } = this;
 
     app.get('/product', product.index);
-    app.get('/product/:filter', product.item);
+    app.get('/product/:select', product.item);
     app.post('/product/rate', product.rating);
     app.get('/product/comments/:product_id', product.comments);
 
@@ -41,7 +41,6 @@ class App {
     app.put('/user/update', user.update);
     app.post('/user/sign-in', user.login);
     app.post('/user/sign-up', user.create);
-    app.delete('/user/delete', user.remove);
 
     app.post('/refresh', user.refresh);
   }
