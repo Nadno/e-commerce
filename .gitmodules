@@ -1,0 +1,3 @@
+[submodule "frone-end"]
+	path = web
+	url = https://github.com/Nadno/vaga-react-frontend.git
