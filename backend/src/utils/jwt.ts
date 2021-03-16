@@ -4,10 +4,9 @@ import { IncomingHttpHeaders } from 'http';
 import JWT from 'jsonwebtoken';
 
 const tokenPrivateKey = String(process.env.JWT_TOKEN_PRIVATE_KEY);
-const refreshTokenPrivateKey = String(process.env.JWT_REFRESH_TOKEN_PRIVATE_KEY);
-
-const options = { expiresIn: '30 minutes' };
-const refreshOptions = { expiresIn: '30 days' };
+const refreshTokenPrivateKey = String(
+  process.env.JWT_REFRESH_TOKEN_PRIVATE_KEY
+);
 
 export interface Payload {
   id: number;
@@ -21,15 +20,28 @@ export interface Decoded {
   version: number;
 }
 
-export const generateJwt = (payload: Payload) =>
-  JWT.sign(payload, tokenPrivateKey, options);
-export const generateRefreshJwt = (payload: Payload) =>
-  JWT.sign(payload, refreshTokenPrivateKey, refreshOptions);
+class UtilJwt {
+  private options = { expiresIn: '30 minutes' };
+  private refreshOptions = { expiresIn: '30 days' };
 
-export const verifyJwt = (token: string) => JWT.verify(token, tokenPrivateKey);
-export const verifyRefreshJwt = (token: string) => JWT.verify(token, refreshTokenPrivateKey) as Decoded;
+  public generateJwt(payload: Payload): string {
+    return JWT.sign(payload, tokenPrivateKey, this.options);
+  }
+  public generateRefreshJwt(payload: Payload): string {
+    return JWT.sign(payload, refreshTokenPrivateKey, this.refreshOptions);
+  }
 
-export const getTokenFromHeaders = (headers: IncomingHttpHeaders) => {
-  const token = headers['authorization'];
-  return token ? token.slice(7, token.length) : null;
+  public verifyJwt(token: string) {
+    return JWT.verify(token, tokenPrivateKey);
+  }
+  public verifyRefreshJwt(token: string): Decoded {
+    return JWT.verify(token, refreshTokenPrivateKey) as Decoded;
+  }
+
+  public getTokenFromHeaders(headers: IncomingHttpHeaders): string | null {
+    const token = headers['authorization'];
+    return token ? token.slice(7, token.length) : null;
+  }
 }
+
+export default new UtilJwt();
