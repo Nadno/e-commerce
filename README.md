@@ -1,43 +1,41 @@
 # Imagens da aplicação
+ ---
+<p align="center"><img src="/img/mobile.jpg" alt="Print com imagens da parte mobile do site" /></p>
 
-[imagens]
-
+<p align="center"><img src="/img/desktop-cart.png" alt="Print com uma imagem desktop da página carrinho" /></p>
+ 
 ## Instalação
-
-### Clonando:
-O primeiro comando clona apenas o backend, o segundo apenas o front-end que está em um modulo diferente. Com o terceiro comando, você pode clonar ambos repositórios.
-
+ ---
+### Clonando
+O primeiro comando clona apenas o backend, o segundo apenas o front-end que está em um módulo diferente. ==Com o terceiro comando, você pode clonar ambos repositórios==.
+ 
 ```sh
     git clone https://github.com/Nadno/vaga-react.git
     git clone https://github.com/Nadno/vaga-react-frontend.git
     git clone --recurse-submodules https://github.com/Nadno/vaga-react.git
 ```
-
-### Dependências:
-
+ 
+### Dependências
 Para instalar as dependências, basta usar um dos comandos abaixo dentro das pastas backend e web.
-
+ 
 ```sh
     yarn install
     npm install
 ```
-
+ 
 ## Configurações
-
-### Variáveis ambientes:
-Para o backend é importante que seja configurado as seguintes variáveis ambientes dentro de um arquivo **.env** na raiz da pasta backend: *JWT_TOKEN_PRIVATE_KEY* e *JWT_REFRESH_TOKEN_PRIVATE_KEY*. Para cada variável basta uma sequência aleatória de caracteres. As variáveis servirão como chaves públicas/secretas para a verificação e autenticação dos usuários.
-
-#### Ex.:
-```sh
+---
+### API
+No frontend caso não queira a url da API no heroku, você pode configurar a **baseURL** do *axios* no arquivo **api** dentro do diretório **src/utils**, como *localhost*, para que as demais funções fornecidas pelo útil api consiga ter acesso aos caminhos a API.
+### Variáveis ambientes
+Caso queira rodar o backend localmente, é importante que seja configurado as seguintes variáveis ambientes dentro de um arquivo **.env** na raiz da pasta backend: *JWT_TOKEN_PRIVATE_KEY* e *JWT_REFRESH_TOKEN_PRIVATE_KEY*. Para cada variável basta uma sequência aleatória de caracteres. As variáveis servirão como chaves públicas/secretas para a verificação e autenticação dos usuários.
+**Ex.:**
+```.env
     JWT_TOKEN_PRIVATE_KEY = asfhsdsdgpshdighdjspgids
     JWT_REFRESH_TOKEN_PRIVATE_KEY = agikdaddasjlkfakdjghaldghal
 ```
-
-### API
-No front-end é preciso configurar a **baseURL** do *axios* no arquivo api dentro do diretório **utils**, como *localhost*, para que as demais funções fornecidas pelo util api consiga ter acesso aos caminhos a API.
-
 ## Comandos
-
+ 
 ```sh
     yarn dev
     npm run start
