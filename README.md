@@ -117,4 +117,59 @@ A escolha do *Next*, deu-se para criação de caminhos estáticos, e uso de *pro
 ### Axios
 Optei pelo axios devido a familiaridade com a biblioteca para o estabelecimento de uma *baseURL*, métodos **HTTP**, e cancelamento de requisições para impedir `setStates` em componentes desmontados.
 ### Styled Components
-Acredito que user styled components me permite, apesar de não conseguir aproveitar muito bem metodologias como **BEM**, a criação e reutilização de componentes/estilos repetitivos como é o caso do `Container`, `FlexContainer` e `GridContainer`, componentes que utilizei bastante nos layouts das páginas.
+Acredito que usar styled components me permite, apesar de não ter conseguido aproveitar muito bem metodologias como **BEM**, a criação e reutilização de componentes/estilos repetitivos como é o caso do `Container`, `FlexContainer` e `GridContainer`, componentes que utilizei bastante nos layouts e outros componentes das páginas. Ao reutilizar o `Container` pude repassar sua animação css para todos componentes que o herdaram.
+
+### Principais `components` / `hooks`
+---
+#### `FormData`
+Como a aplicação possui quatro formulários diferentes, me dei ao trabalho de criar um *componente de alta ordem* para tratar e validar dados de formulários. O `FormData` recebe quatro parâmetros:
+- `Component` o componente a ser encapsulado;
+- `initialData` os dados do formulário;
+- `validate` função que valida os dados do formulário;
+- `optionalData` array contendo todos dados opcionais do formulário;
+ 
+`FormData` possui três estados:
+- `data` como os dados fornecido;
+- `changedInput` armazena o nome do último input atualizado;
+- `inputError` armazena erros dos inputs. Quando o componente é iniciado, esse estado recebe todos inputs que são requeridos, impedindo o *submit* do formulário com inputs vazios;
+ 
+Esses estados junto a `validSubmit` (função que valida os dados antes de seu envio) e `handleChange` (função que altera o estado dos inputs), são retornados para o componente encapsulado. O componente possui um tipo, que recebe o tipo dos dados e das props do componente
+ 
+```jsx
+    const SignIn: FormComponent<SignInData /*, { props caso houvesse }*/ > = ({
+        data,
+        inputError,
+        validSubmit,
+        handleChange,
+    }) => {
+        //...
+    }
+```
+ 
+#### `StoreProvider`
+Possui métodos que validam a autenticação do usuário quando o componente é montado e então a cada cinco segundos. De maneira que sempre que o `token` estiver expirado, é feito seu `refresh`.
+ 
+StoreProvider possui além dos estados de `token` e `refreshToken`, `account` contendo o `nome`, `avatar` e `id` do usuário. Esses estados contribuem para o **hook** `useAccount` que dá fácil acesso as funcionalidades de **login** e **logout**, e também ao `token` e `account`.
+ 
+**Ex. de funcionalidade após a criação de uma conta:**
+```ts
+    const { login } = useAccount();
+ 
+    const handleSubmit = useCallback(
+        (e: FormEvent) => {
+            e.preventDefault();
+ 
+            validSubmit(warnModal => {
+                apiPost('/user/sign-up', formatAccountToAPI(data))
+                    .then(({ data }) => login({ data }, goToPath))
+                    .catch(handleRequest(warnModal));
+            });
+        },
+        [data, inputError]
+    );
+```
+ 
+Ainda preciso refatorar `validSubmit` devido indentação *hadouken*, mas acredito estar limpo o suficiente para este exemplo.
+ 
+StoreProvider também possui um estado chamado `cart`, que é aproveitado pelo **hook** `useCart` para facilitar o uso dos `id` dos produtos, e as funcionalidades de `addToCart` (utilizado nas páginas dos produtos) e `removeFromCart` (utilizado no próprio carrinho).
+ 
