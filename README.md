@@ -1,13 +1,12 @@
 # Imagens da aplicação
- ---
+
 <p align="center"><img src="./img/mobile.jpg" alt="Print com imagens da parte mobile do site" /></p>
 
 <p align="center"><img src="./img/desktop-cart.png" alt="Print com uma imagem desktop da página carrinho" /></p>
  
 ## Instalação
- ---
 ### Clonando
-O primeiro comando clona apenas o backend, o segundo apenas o front-end que está em um módulo diferente. ==Com o terceiro comando, você pode clonar ambos repositórios==.
+O primeiro comando clona apenas o backend, o segundo apenas o front-end que está em um módulo diferente. <mark>Com o terceiro comando, você pode clonar ambos repositórios</mark>.
  
 ```sh
     git clone https://github.com/Nadno/vaga-react.git
@@ -24,7 +23,6 @@ Para instalar as dependências, basta usar um dos comandos abaixo dentro das pas
 ```
  
 ## Configurações
----
 ### API
 No frontend caso não queira a url da API no heroku, você pode configurar a **baseURL** do *axios* no arquivo **api** dentro do diretório **src/utils**, como *localhost*, para que as demais funções fornecidas pelo útil api consiga ter acesso aos caminhos a API.
 ### Variáveis ambientes
@@ -54,15 +52,12 @@ Caso queira rodar o backend localmente, é importante que seja configurado as se
 - *type-check* para procurar por erros de tipagem.
  
 # Aplicação
----
 Você pode acessar a aplicação [aqui](https://e-commerce-vert-one.vercel.app/products). Caso a API hospedada no *heroku* esteja em modo hibernação, você pode conferir as páginas estáticas das categorias **mouses** ou **impressoras**.
  
 ## Typescript
----
 Além de clarear muitos lugares no código, *typescript* é um grande facilitador quando se trabalha com diversos tipos de dados mais complexos.
  
 ## Backend
----
 Aqui aproveitei um pouco do conhecimento que já havia com *NodeJS*, *Knex*, e *Express* para criar as rotas da `API`, junto com a autenticação do usuário. E com *knex* e **sqlite3** criar as tabelas dos usuários e avaliações.
 Utilizei um arquivo JSON, para guardar os produtos, de maneira a ter mais flexibilidade ante mudanças de implementações do que eu teria caso usasse um banco de dados. No backend utilizei a estrutura de classes do javascript em parte dos arquivos, com exceção de arquivos com poucas ou uma `função`.
 ### Controllers
@@ -109,7 +104,6 @@ Para simplificar, comentarei apenas sobre as rotas de produtos.
 - `/product/comments/:product_id` retorna comentários de um produto, com um limite de cinco por vez.
  
 ## Frontend
----
 O [front-end encontra-se em outro modulo](https://github.com/Nadno/vaga-react-frontend) para facilitar o deploy dessa parte na vercel com o uso de Next. A estrutura de pastas foi separada em *components*, *HOC* (para componentes de alta ordem), *hooks*, *pages* (do próprio next), *providers* (para contexts), *screen*, *styles*, *types* e *utils*. A pasta styles cuida apenas do **tema** e **estilo global** da aplicação, os demais estilos foram mantidos com seus componentes.
 Tive bastante dificuldade implementação de *loading* em componentes, portando até o momento há somente *loading* durante a navegação entre páginas.
 ### Next
@@ -120,7 +114,6 @@ Optei pelo axios devido a familiaridade com a biblioteca para o estabelecimento 
 Acredito que usar styled components me permite, apesar de não ter conseguido aproveitar muito bem metodologias como **BEM**, a criação e reutilização de componentes/estilos repetitivos como é o caso do `Container`, `FlexContainer` e `GridContainer`, componentes que utilizei bastante nos layouts e outros componentes das páginas. Ao reutilizar o `Container` pude repassar sua animação css para todos componentes que o herdaram.
 
 ### Principais `components` / `hooks`
----
 #### `FormData`
 Como a aplicação possui quatro formulários diferentes, me dei ao trabalho de criar um *componente de alta ordem* para tratar e validar dados de formulários. O `FormData` recebe quatro parâmetros:
 - `Component` o componente a ser encapsulado;
