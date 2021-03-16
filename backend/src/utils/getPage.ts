@@ -1,7 +1,7 @@
 const isValidQuery = (value: any) =>
   typeof value === 'string' && isFinite(parseInt(value));
 
-function getPagination(page: any, offset: any) {
+export const  getPagination = (page: any, offset: any) => {
   const itemsForPage = Number(offset);
   const selectedPage = Number(page);
 
@@ -15,11 +15,11 @@ function getPagination(page: any, offset: any) {
   };
 }
 
-export default function getPage(page: any, offset: any, products: any[]) {
+export const getPage = (page: any, offset: any, products: any[]) => {
   const { itemsForPage, from, to } = getPagination(page, offset);
 
   if (isValidQuery(page) && isValidQuery(offset)) {
-    const TOTAL_PAGES = Math.round(products.length / itemsForPage);
+    const TOTAL_PAGES = Math.ceil(products.length / itemsForPage);
     return {
       products: products.slice(from, to),
       pages: TOTAL_PAGES,
