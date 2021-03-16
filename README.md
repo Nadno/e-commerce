@@ -1,8 +1,8 @@
 # Imagens da aplicação
  ---
-<p align="center"><img src="/img/mobile.jpg" alt="Print com imagens da parte mobile do site" /></p>
+<p align="center"><img src="./img/mobile.jpg" alt="Print com imagens da parte mobile do site" /></p>
 
-<p align="center"><img src="/img/desktop-cart.png" alt="Print com uma imagem desktop da página carrinho" /></p>
+<p align="center"><img src="./img/desktop-cart.png" alt="Print com uma imagem desktop da página carrinho" /></p>
  
 ## Instalação
  ---
