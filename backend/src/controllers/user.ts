@@ -53,19 +53,23 @@ class User {
       const [account] = await db('users')
         .select('*')
         .where('id', '=', newAccountId);
+      {
+        const { name, avatar, id, jwtVersion } = account;
 
-      const token = Jwt.generateJwt({ id: account.id });
-      const refreshToken = Jwt.generateRefreshJwt({
-        id: account.id,
-        version: account.jwtVersion,
-      });
+        const token = Jwt.generateJwt({ id });
+        const refreshToken = Jwt.generateRefreshJwt({
+          id,
+          version: jwtVersion,
+        });
 
-      return res.jsonOk({
-        avatar,
-        id: account.id,
-        token,
-        refreshToken,
-      });
+        return res.jsonOk({
+          avatar,
+          id,
+          name,
+          token,
+          refreshToken,
+        });
+      }
     } catch (err) {
       return res.jsonServerError({
         message:
@@ -117,11 +121,12 @@ class User {
 
   public async refresh(req: Request, res: Response): Promise<Response> {
     const token = Jwt.getTokenFromHeaders(req.headers);
-    if (token == null) return res.jsonUnauthorized({ message: 'Token inválido' });
-	
+    if (token == null)
+      return res.jsonUnauthorized({ message: 'Token inválido' });
+
     try {
       const decoded = Jwt.verifyRefreshJwt(token);
-	
+
       const [account] = await db('users')
         .select('users.id', 'users.name', 'users.avatar')
         .where('id', '=', decoded.id);
