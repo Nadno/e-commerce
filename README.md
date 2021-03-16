@@ -6,7 +6,7 @@
  
 ## Instalação
 ### Clonando
-O primeiro comando clona apenas o backend, o segundo apenas o front-end que está em um módulo diferente. ==Com o terceiro comando, você pode clonar ambos repositórios==.
+O primeiro comando clona apenas o backend, o segundo apenas o front-end que está em um módulo diferente. <mark>Com o terceiro comando, você pode clonar ambos repositórios</mark>.
  
 ```sh
     git clone https://github.com/Nadno/vaga-react.git
