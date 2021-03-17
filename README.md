@@ -144,22 +144,27 @@ Possui métodos que validam a autenticação do usuário quando o componente é 
  
 StoreProvider possui além dos estados de `token` e `refreshToken`, `account` contendo o `nome`, `avatar` e `id` do usuário. Esses estados contribuem para o **hook** `useAccount` que dá fácil acesso as funcionalidades de **login** e **logout**, e também ao `token` e `account`.
  
-**Ex. de funcionalidade após a criação de uma conta:**
+**Ex. da funcionalidade login:**
 ```ts
-    const { login } = useAccount();
- 
-    const handleSubmit = useCallback(
-        (e: FormEvent) => {
-            e.preventDefault();
- 
-            validSubmit(warnModal => {
-                apiPost('/user/sign-up', formatAccountToAPI(data))
-                    .then(({ data }) => login({ data }, goToPath))
+    const SignIn: FormComponent<SignInData> = ({
+        data,
+        inputError,
+        validSubmit,
+        handleChange,
+    }) => {
+        const { login } = useAccount();
+
+        const handleSubmit = useCallback<ValidatedSubmit>(
+            (warnModal) => {
+                apiPost('/user/sign-in', { ...data })
+                    .then(login)
                     .catch(handleRequest(warnModal));
-            });
-        },
-        [data, inputError]
-    );
+            },
+            [data, inputError]
+        );
+
+        // ...
+    }
 ```
  
 Ainda preciso refatorar `validSubmit` devido indentação *hadouken*, mas acredito estar limpo o suficiente para este exemplo.
