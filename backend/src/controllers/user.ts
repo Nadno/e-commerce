@@ -53,6 +53,7 @@ class User {
       const [account] = await db('users')
         .select('*')
         .where('id', '=', newAccountId);
+
       {
         const { name, avatar, id, jwtVersion } = account;
 
@@ -80,12 +81,12 @@ class User {
 
   public async login(req: Request, res: Response): Promise<Response> {
     try {
-      const account = await checkLogin(req.body);
+      const { account, jwtVersion } = await checkLogin(req.body);
 
       const token = Jwt.generateJwt({ id: account.id });
       const refreshToken = Jwt.generateRefreshJwt({
         id: account.id,
-        version: account.jwtVersion,
+        version: jwtVersion,
       });
 
       return res.jsonOk({
@@ -102,7 +103,7 @@ class User {
     const { name, tel, avatar, address } = req.body;
 
     try {
-      const account = await checkLogin(req.body);
+      const { account } = await checkLogin(req.body);
 
       await db('users')
         .update({
@@ -128,7 +129,7 @@ class User {
       const decoded = Jwt.verifyRefreshJwt(token);
 
       const [account] = await db('users')
-        .select('users.id', 'users.name', 'users.avatar')
+        .select('jwtVersion')
         .where('id', '=', decoded.id);
 
       if (!account) return res.jsonUnauthorized();
