@@ -22,7 +22,7 @@ export interface Decoded {
 
 class UtilJwt {
   private options = { expiresIn: '30 minutes' };
-  private refreshOptions = { expiresIn: '30 days' };
+  private refreshOptions = { expiresIn: '120 minutes' };
 
   public generateJwt(payload: Payload): string {
     return JWT.sign(payload, tokenPrivateKey, this.options);
