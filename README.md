@@ -6,6 +6,7 @@
  
 ## Sobre
 A aplicação possui funcionalidades como: pesquisar por um produto; filtrar por categoria; avaliar um produto; adicionar e retirar um produto do carrinho. E ao fim, na página de checkout é simulado a compra dos produtos.
+Você pode acessar a aplicação [aqui](https://e-commerce-vert-one.vercel.app/products). Caso a API hospedada no *heroku* esteja em modo hibernação, você pode conferir as páginas estáticas das categorias **mouses** ou **impressoras**.
 
 ## Instalação
 ### Clonando
@@ -54,11 +55,9 @@ Caso queira rodar o backend localmente, é importante que seja configurado as se
 - *build* para gerar a versão de distribuição.
 - *type-check* para procurar por erros de tipagem.
  
-# Aplicação
-Você pode acessar a aplicação [aqui](https://e-commerce-vert-one.vercel.app/products). Caso a API hospedada no *heroku* esteja em modo hibernação, você pode conferir as páginas estáticas das categorias **mouses** ou **impressoras**.
- 
+# Detalhes
 ## Typescript
-Além de clarear muitos lugares no código, *typescript* é um grande facilitador quando se trabalha com diversos tipos de dados mais complexos.
+Além de ajudar a identificar erros no código, *typescript* é um grande facilitador quando se trabalha com diversos tipos de dados mais complexos.
  
 ## Backend
 Aqui aproveitei um pouco do conhecimento que já havia com *NodeJS*, *Knex*, e *Express* para criar as rotas da `API`, junto com a autenticação do usuário. E com *knex* e **sqlite3** criar as tabelas dos usuários e avaliações.
