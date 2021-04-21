@@ -4,6 +4,9 @@
 
 <p align="center"><img src="./img/desktop-cart.png" alt="Print com uma imagem desktop da página carrinho" /></p>
  
+## Sobre
+A aplicação possui funcionalidades como: pesquisar por um produto; filtrar por categoria; avaliar um produto; adicionar e retirar um produto do carrinho. E Ao fim, na página de checkout é simulado a compra dos produtos.
+
 ## Instalação
 ### Clonando
 O primeiro comando clona apenas o backend, o segundo apenas o front-end que está em um módulo diferente. <mark>Com o terceiro comando, você pode clonar ambos repositórios</mark>.
