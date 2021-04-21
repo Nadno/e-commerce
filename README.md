@@ -5,7 +5,7 @@
 <p align="center"><img src="./img/desktop-cart.png" alt="Print com uma imagem desktop da página carrinho" /></p>
  
 ## Sobre
-A aplicação possui funcionalidades como: pesquisar por um produto; filtrar por categoria; avaliar um produto; adicionar e retirar um produto do carrinho. E Ao fim, na página de checkout é simulado a compra dos produtos.
+A aplicação possui funcionalidades como: pesquisar por um produto; filtrar por categoria; avaliar um produto; adicionar e retirar um produto do carrinho. E ao fim, na página de checkout é simulado a compra dos produtos.
 
 ## Instalação
 ### Clonando
