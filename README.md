@@ -13,9 +13,9 @@ Você pode acessar a aplicação [aqui](https://e-commerce-vert-one.vercel.app/p
 O primeiro comando clona apenas o backend, o segundo apenas o front-end que está em um módulo diferente. <mark>Com o terceiro comando, você pode clonar ambos repositórios</mark>.
  
 ```sh
-    git clone https://github.com/Nadno/vaga-react.git
-    git clone https://github.com/Nadno/vaga-react-frontend.git
-    git clone --recurse-submodules https://github.com/Nadno/vaga-react.git
+    git clone https://github.com/Nadno/e-commerce.git
+    git clone https://github.com/Nadno/e-commerce-web.git
+    git clone --recurse-submodules https://github.com/Nadno/e-commerce.git
 ```
  
 ### Dependências
